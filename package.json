@@ -1,5 +1,16 @@
 {
+  "name": "citybike",
+  "version": "1.0.0",
+  "description": "This is the pre-assignment for Solita Dev Academy Finland January 2024. But if you’re here just purely out of curiosity, feel free to snatch the idea and make your own city bike app just for the fun of it!",
+  "main": "index.js",
   "dependencies": {
+    "concurrently": "^8.2.2",
     "zod": "^3.23.8"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
