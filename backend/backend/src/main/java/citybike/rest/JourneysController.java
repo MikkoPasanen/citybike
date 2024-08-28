@@ -1,4 +1,4 @@
-package citybike.backend.rest;
+package citybike.rest;
 
 import citybike.backend.entity.Journey;
 import citybike.backend.entity.Station;

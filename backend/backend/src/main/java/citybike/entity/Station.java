@@ -1,4 +1,4 @@
-package citybike.backend.entity;
+package citybike.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
