@@ -4,10 +4,7 @@ import citybike.entity.Station;
 import citybike.services.StationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,12 +20,14 @@ public class StationsController {
         this.stationRepository = stationRepository;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/all")
     public ResponseEntity<List<Station>> getAllStations() {
         List<Station> stations = stationRepository.findAll();
         return new ResponseEntity<>(stations, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/singular/{id}")
     public ResponseEntity<Station> getStationById(@PathVariable int id) {
         Station station100 = new Station(100, "Asema sata", "Asemankatu 100", "7.5263", "5.5235");
