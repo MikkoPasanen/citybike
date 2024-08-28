@@ -1,7 +1,7 @@
-package citybike.code.rest;
+package citybike.rest;
 
-import citybike.code.entity.Station;
-import citybike.code.services.StationRepository;
+import citybike.entity.Station;
+import citybike.services.StationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +21,6 @@ public class StationsController {
 
     public StationsController(StationRepository stationRepository) {
         this.stationRepository = stationRepository;
-    }
-
-    @GetMapping("/fakeall")
-    public ResponseEntity<List<Station>> getAllFakeStations() {
-        List<Station> stations = new ArrayList<>();
-        Collections.addAll(stations,
-                new Station(1, "Asema 1", "Asemankatu 1", "7.5263", "5.5235"),
-                new Station(2, "Asema 2", "Asemankatu 2", "8.5732", "8.3251")
-        );
-        return new ResponseEntity<>(stations, HttpStatus.OK);
     }
 
     @GetMapping("/all")

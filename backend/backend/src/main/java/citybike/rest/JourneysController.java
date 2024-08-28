@@ -1,12 +1,11 @@
-package citybike.code.rest;
+package citybike.rest;
 
-import citybike.code.entity.Journey;
+import citybike.entity.Journey;
+import citybike.services.JourneyRepository;
+import citybike.services.StationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,13 +16,15 @@ import java.util.List;
 @RequestMapping("/journeys")
 public class JourneysController {
 
+    private final JourneyRepository journeyRepository;
+
+    public JourneysController(JourneyRepository journeyRepository) {
+        this.journeyRepository = journeyRepository;
+    }
+
     @GetMapping("/all")
-    public ResponseEntity<List<Journey>> getAllStations() {
-        List<Journey> journeys = new ArrayList<>();
-        Collections.addAll(journeys,
-                new Journey(1, LocalDateTime.now(), LocalDateTime.now().plusHours(1), 1, 2, 10, 15),
-                new Journey(2, LocalDateTime.now(), LocalDateTime.now().plusHours(2), 2, 1, 20, 30)
-        );
+    public ResponseEntity<List<Journey>> getAllStations(@RequestParam(defaultValue = "100") int size) {
+        List<Journey> journeys = journeyRepository.findLimited(size);
         return new ResponseEntity<>(journeys, HttpStatus.OK);
     }
 
