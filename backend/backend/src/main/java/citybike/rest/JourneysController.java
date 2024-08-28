@@ -1,19 +1,19 @@
-package citybike.rest;
+package citybike.code.rest;
 
-import citybike.backend.entity.Journey;
-import citybike.backend.entity.Station;
+import citybike.code.entity.Journey;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/journeys")
 public class JourneysController {
 
