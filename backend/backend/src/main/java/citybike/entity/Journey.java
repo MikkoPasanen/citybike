@@ -1,4 +1,4 @@
-package citybike.code.entity;
+package citybike.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Data
 @AllArgsConstructor
 @Table(name = "journey")
@@ -29,10 +30,10 @@ public class Journey {
     private int returnStation;
 
     @Column(name = "distance")
-    private int distance;
+    private Integer distance;
 
     @Column(name = "duration")
-    private int duration;
+    private Integer duration;
 
     private Journey() {}
 }
