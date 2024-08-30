@@ -2,6 +2,7 @@ package citybike.rest;
 
 import citybike.entity.Journey;
 import citybike.services.JourneyRepository;
+import citybike.services.JourneyService;
 import citybike.services.StationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,26 +18,21 @@ import java.util.List;
 @RequestMapping("/journeys")
 public class JourneysController {
 
-    private final JourneyRepository journeyRepository;
+    private final JourneyService journeyService;
 
-    public JourneysController(JourneyRepository journeyRepository) {
-        this.journeyRepository = journeyRepository;
+    public JourneysController(JourneyService journeyService) {
+        this.journeyService = journeyService;
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Journey>> getAllStations(@RequestParam(defaultValue = "100") int size) {
-        List<Journey> journeys = journeyRepository.findLimited(size);
-        return new ResponseEntity<>(journeys, HttpStatus.OK);
+    public ResponseEntity<List<Journey>> getAllStations(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "100") int size) {
+        return new ResponseEntity<>(journeyService.getAllJourneys(page, size), HttpStatus.OK);
     }
 
     @GetMapping("/singular/{id}")
     public ResponseEntity<Journey> getStationById(@PathVariable int id) {
-        Journey journey100 = new Journey(100, LocalDateTime.now(), LocalDateTime.now().plusHours(1), 1, 2, 10, 15);
-
-        Journey journey200 = new Journey(200, LocalDateTime.now(), LocalDateTime.now().plusHours(2), 2, 1, 20, 30);
-
-        return id == 100
-                ? new ResponseEntity<>(journey100, HttpStatus.OK)
-                : new ResponseEntity<>(journey200, HttpStatus.OK);
+        return new ResponseEntity<>(journeyService.getJourneyById(id), HttpStatus.OK);
     }
 }
