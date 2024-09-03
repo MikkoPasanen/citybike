@@ -28,8 +28,10 @@ jobs:
 
       - name: Check with prettier
         run: npm run prettier:format
+        working-directory: frontend
         continue-on-error: true
 
       - name: Check with eslint
         run: npm run lint
+        working-directory: frontend
         continue-on-error: false
