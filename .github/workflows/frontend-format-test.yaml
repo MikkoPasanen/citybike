@@ -25,6 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: frontend
 
       - name: Check with prettier
         run: npm run prettier:format
