@@ -1,4 +1,4 @@
-name: Test frontend formatting
+name: Test frontend
 
 on:
   push:
@@ -21,13 +21,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run Prettier and fix problems
-        uses: creyD/prettier_action@v4.3
-        with:
-          prettier_options: --write **/*.{js,md,tsx,ts}
-          same_commit: True
+      - name: Check with prettier
+        run: npm run prettier:format
+        continue-on-error: true
+
+      - name: Check with eslint
+        run: npm run lint
+        continue-on-error: false
