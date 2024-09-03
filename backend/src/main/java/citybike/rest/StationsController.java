@@ -23,8 +23,11 @@ public class StationsController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/all")
-    public ResponseEntity<List<Station>> getAllStations() {
-        return new ResponseEntity<>(stationService.getAllStations(), HttpStatus.OK);
+    public ResponseEntity<List<Station>> getAllStations(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "100") int size
+    ) {
+        return new ResponseEntity<>(stationService.getAllStations(page, size), HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:5173")
