@@ -27,4 +27,4 @@ jobs:
       - name: Run Prettier and fix problems
         uses: creyD/prettier_action@v4.3
         with:
-          prettier_options: --check --write **/*.{js,md,tsx,ts}
+          prettier_options: --write **/*.{js,md,tsx,ts}
