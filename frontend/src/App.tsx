@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import icon from "leaflet/dist/images/marker-icon.png";
 import L from "leaflet";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { z } from "zod";
 
 const defaultIcon = new L.Icon({
     iconUrl: icon,
