@@ -8,21 +8,25 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 
 const Navbar = () => {
+    const [selected, setSelected] = useState<string>("stations");
     return (
         <div className="bg-neutral-900 flex items-center p-3 justify-between block border-b-2 border-yellow-400">
             <div className="flex items-center ml-3">
                 <h1 className="text-2xl font-bold m-1 mr-5">Citybikes</h1>
                 <Link
                     to="/stations"
-                    className="p-1 mr-2 bg-yellow-400 text-black font-semibold br-50 rounded-lg"
+                    onClick={() => setSelected("stations")}
+                    className={`p-1 mr-2 ${selected == "stations" ? "bg-yellow-400 border-2 border-yellow-400" : "border-2 border-yellow-400 text-white"} text-black font-semibold br-50 rounded-lg`}
                 >
                     Stations
                 </Link>
                 <Link
                     to="/journeys"
-                    className="p-1 mr-2 bg-yellow-400 text-black font-semibold br-50 rounded-lg"
+                    onClick={() => setSelected("journeys")}
+                    className={`p-1 mr-2 ${selected == "journeys" ? "bg-yellow-400 border-2 border-yellow-400" : "border-2 border-yellow-400 text-white"} text-black font-semibold br-50 rounded-lg`}
                 >
                     Journeys
                 </Link>
