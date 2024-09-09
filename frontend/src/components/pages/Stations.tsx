@@ -101,6 +101,12 @@ const Stations = () => {
                             <PaginationLink to="/journeys">1</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
+                            <PaginationLink to="/journeys">2</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink to="/journeys">3</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
                             <PaginationEllipsis />
                         </PaginationItem>
                         <PaginationItem>

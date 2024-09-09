@@ -10,20 +10,6 @@ import {
     Navigate,
 } from "react-router-dom";
 import Journeys from "./components/pages/Journeys";
-// import axios from "axios";
-// import icon from "leaflet/dist/images/marker-icon.png";
-// import L from "leaflet";
-// import { Input } from "@/components/ui/input";
-// import { Button } from "@/components/ui/button";
-
-// const defaultIcon = new L.Icon({
-//     iconUrl: icon,
-//     iconSize: [31, 41],
-//     iconAnchor: [15, 41],
-//     popupAnchor: [1, -41],
-// });
-
-// L.Marker.prototype.options.icon = defaultIcon;
 
 const App = () => {
     return (
