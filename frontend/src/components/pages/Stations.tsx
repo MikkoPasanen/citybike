@@ -1,4 +1,16 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+
+// Components
+import SingleStation from "./Single-station";
+
+// Types & data
+import { Station } from "../data/types";
+import { DataTable } from "@/components/data/data-table";
+import { ColumnDef } from "@tanstack/react-table";
+
+// Shadcn
+import { Button } from "../ui/button";
 import {
     Pagination,
     PaginationContent,
@@ -9,35 +21,9 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { DataTable } from "@/components/data/data-table";
-import axios from "axios";
-
-import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "../ui/button";
-import SingleStation from "./Single-station";
-
-type Station = {
-    id: number;
-    stationName: string;
-    stationAddress: string;
-    coordinateX: string;
-    coordinateY: string;
-};
-
-async function fetchStations() {
-    const response = await axios.get("http://localhost:8080/stations/all", {
-        params: {
-            page: 1,
-            size: 5,
-        },
-    });
-    if (response.status === 200) {
-        return response.data;
-    }
-}
-
 const Stations = () => {
     const [data, setData] = useState<Station[]>([]);
+    const [openedStation, setOpenedStation] = useState<Station | null>(null);
     const [openDialog, setOpenDialog] = useState(false);
 
     const columns: ColumnDef<Station>[] = [
@@ -54,7 +40,10 @@ const Stations = () => {
             cell: ({ row }) => (
                 <div className="flex justify-center">
                     <Button
-                        onClick={() => setOpenDialog(true)}
+                        onClick={() => {
+                            setOpenedStation(row.original);
+                            setOpenDialog(true);
+                        }}
                         className="bg-yellow-400 text-black font-semibold"
                     >
                         More info
@@ -63,6 +52,23 @@ const Stations = () => {
             ),
         },
     ];
+
+    const closeDialog = () => {
+        setOpenDialog(false);
+        setOpenedStation(null);
+    };
+
+    async function fetchStations() {
+        const response = await axios.get("http://localhost:8080/stations/all", {
+            params: {
+                page: 1,
+                size: 5,
+            },
+        });
+        if (response.status === 200) {
+            return response.data;
+        }
+    }
 
     useEffect(() => {
         async function fetchData() {
@@ -103,7 +109,11 @@ const Stations = () => {
                     </PaginationContent>
                 </Pagination>
             </div>
-            <SingleStation></SingleStation>
+            <SingleStation
+                isOpen={openDialog}
+                station={openedStation}
+                closeDialog={closeDialog}
+            />
         </div>
     );
 };

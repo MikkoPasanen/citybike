@@ -1,40 +1,37 @@
-import { Button } from "@/components/ui/button";
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
+import { Station } from "../data/types";
 
-const SingleStation = () => {
+const SingleStation = ({
+    isOpen,
+    station,
+    closeDialog,
+}: {
+    isOpen: boolean;
+    station: Station | null;
+    closeDialog: () => void;
+}) => {
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button>Open Dialog</Button>
-            </DialogTrigger>
+        <Dialog open={isOpen} onOpenChange={closeDialog}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Share link</DialogTitle>
+                    <DialogTitle>
+                        {station?.stationName + ", " + station?.stationAddress}
+                    </DialogTitle>
                     <DialogDescription>
-                        Anyone who has this link will be able to view this.
+                        Kartasta näet aseman sijainnin.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="flex items-center space-x-2">
                     <div className="grid flex-1 gap-2">
-                        <h2>testi</h2>
+                        <h2>kartta tähä</h2>
                     </div>
                 </div>
-                <DialogFooter className="sm:justify-start">
-                    <DialogClose asChild>
-                        <Button type="button" variant="secondary">
-                            Close
-                        </Button>
-                    </DialogClose>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
