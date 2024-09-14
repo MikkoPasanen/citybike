@@ -39,12 +39,13 @@ const SingleStation = ({
             <DialogContent className="border-2 border-yellow-400 w-full max-w-3xl">
                 <DialogHeader>
                     <DialogTitle className="text-center">
-                        {station?.stationName + ", " + station?.stationAddress}
+                        {station?.stationName}
+                        <div className="mb-1" />
+                        {station?.stationAddress}
                     </DialogTitle>
                     <DialogDescription className="text-center">
                         Kartasta näet aseman sijainnin.
                         <br />
-                        {station?.coordinateX + ", " + station?.coordinateY}
                     </DialogDescription>
                 </DialogHeader>
                 <MapContainer

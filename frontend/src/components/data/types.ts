@@ -5,3 +5,13 @@ export type Station = {
     coordinateX: string;
     coordinateY: string;
 };
+
+export type Journey = {
+    id: number;
+    departureTime: string;
+    returnTime: string;
+    departureStation: number;
+    returnStation: number;
+    distance: number;
+    duration: number;
+};

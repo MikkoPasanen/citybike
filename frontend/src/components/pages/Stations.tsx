@@ -25,6 +25,7 @@ const Stations = () => {
     const [data, setData] = useState<Station[]>([]);
     const [openedStation, setOpenedStation] = useState<Station | null>(null);
     const [openDialog, setOpenDialog] = useState(false);
+    const [activeStep, setActiveStep] = useState<string>("first");
 
     const columns: ColumnDef<Station>[] = [
         {
@@ -98,13 +99,46 @@ const Stations = () => {
                             <PaginationPrevious to="#" />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink to="/journeys">1</PaginationLink>
+                            <PaginationLink
+                                to="#"
+                                isActive={activeStep === "first"}
+                                onClick={() => setActiveStep("first")}
+                                className={
+                                    activeStep === "first"
+                                        ? "bg-yellow-400 text-black hover:bg-yellow-600 hover:text-black"
+                                        : ""
+                                }
+                            >
+                                1
+                            </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink to="/journeys">2</PaginationLink>
+                            <PaginationLink
+                                to="#"
+                                isActive={activeStep === "second"}
+                                onClick={() => setActiveStep("second")}
+                                className={
+                                    activeStep === "second"
+                                        ? "bg-yellow-400 text-black hover:bg-yellow-600 hover:text-black"
+                                        : ""
+                                }
+                            >
+                                2
+                            </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink to="/journeys">3</PaginationLink>
+                            <PaginationLink
+                                to="#"
+                                isActive={activeStep === "third"}
+                                onClick={() => setActiveStep("third")}
+                                className={
+                                    activeStep === "third"
+                                        ? "bg-yellow-400 text-black hover:bg-yellow-600 hover:text-black"
+                                        : ""
+                                }
+                            >
+                                3
+                            </PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
                             <PaginationEllipsis />
