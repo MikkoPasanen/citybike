@@ -20,6 +20,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
+import { formatTimestamp } from "@/lib/timeformat";
 
 const Journeys = () => {
     const [data, setData] = useState<Journey[]>([]);
@@ -46,11 +47,11 @@ const Journeys = () => {
         },
         {
             accessorKey: "distance",
-            header: () => <div className="text-center">Distance</div>,
+            header: () => <div className="text-center">Distance (m)</div>,
         },
         {
             accessorKey: "duration",
-            header: () => <div className="text-center">Duration</div>,
+            header: () => <div className="text-center">Duration (sec)</div>,
         },
         {
             id: "actions",
@@ -107,7 +108,14 @@ const Journeys = () => {
             <div className="text-center flex-grow">
                 <h1 className="text-2xl pt-2 font-semibold">Journeys</h1>
                 <div className="container mx-auto py-10">
-                    <DataTable columns={columns} data={data} />
+                    <DataTable
+                        columns={columns}
+                        data={data.map((journey) => {
+                            journey.departureTime = formatTimestamp(journey.departureTime);
+                            journey.returnTime = formatTimestamp(journey.returnTime);
+                            return journey;
+                        })}
+                    />
                 </div>
                 <Pagination>
                     <PaginationContent>

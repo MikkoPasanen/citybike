@@ -10,8 +10,8 @@ export type Journey = {
     id: number;
     departureTime: string;
     returnTime: string;
-    departureStation: number;
-    returnStation: number;
+    departureStation: string;
+    returnStation: string;
     distance: number;
     duration: number;
 };
