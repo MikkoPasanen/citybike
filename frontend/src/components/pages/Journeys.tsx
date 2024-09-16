@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 // Components
-import SingleStation from "./Single-station";
+import SingleJourney from "./Single-journey";
 
 // Types & data
 import { Journey } from "../data/types";
@@ -24,7 +24,7 @@ import { formatTimestamp } from "@/lib/timeformat";
 
 const Journeys = () => {
     const [data, setData] = useState<Journey[]>([]);
-    const [openedStation, setOpenedStation] = useState<Journey | null>(null);
+    const [openedJourney, setOpenedJourney] = useState<Journey | null>(null);
     const [openDialog, setOpenDialog] = useState(false);
     const [activeStep, setActiveStep] = useState<string>("first");
 
@@ -46,20 +46,12 @@ const Journeys = () => {
             header: () => <div className="text-center">Return</div>,
         },
         {
-            accessorKey: "distance",
-            header: () => <div className="text-center">Distance (m)</div>,
-        },
-        {
-            accessorKey: "duration",
-            header: () => <div className="text-center">Duration (sec)</div>,
-        },
-        {
             id: "actions",
             cell: ({ row }) => (
                 <div className="flex justify-center">
                     <Button
                         onClick={() => {
-                            setOpenedStation(row.original);
+                            setOpenedJourney(row.original);
                             setOpenDialog(true);
                         }}
                         className="bg-yellow-400 text-black font-semibold"
@@ -111,8 +103,12 @@ const Journeys = () => {
                     <DataTable
                         columns={columns}
                         data={data.map((journey) => {
-                            journey.departureTime = formatTimestamp(journey.departureTime);
-                            journey.returnTime = formatTimestamp(journey.returnTime);
+                            journey.departureTime = formatTimestamp(
+                                journey.departureTime
+                            );
+                            journey.returnTime = formatTimestamp(
+                                journey.returnTime
+                            );
                             return journey;
                         })}
                     />
@@ -173,11 +169,11 @@ const Journeys = () => {
                     </PaginationContent>
                 </Pagination>
             </div>
-            {/* <SingleStation
+            <SingleJourney
                 isOpen={openDialog}
-                ={openedStation}
+                journey={openedJourney}
                 closeDialog={closeDialog}
-            /> */}
+            />
         </div>
     );
 };

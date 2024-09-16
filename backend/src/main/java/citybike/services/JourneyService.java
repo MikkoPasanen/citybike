@@ -40,7 +40,7 @@ public class JourneyService {
                     departureStation != null ? departureStation.getStationName() : "Unknown Station",
                     returnStation != null ? returnStation.getStationName() : "Unknown Station",
                     journey.getDistance(),
-                    journey.getDuration()
+                    journey.getDuration() / 60
             );
         }).toList();
 
