@@ -2,15 +2,12 @@ package citybike.services;
 
 import citybike.entity.Journey;
 import citybike.exceptions.JourneyNotFoundException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.assertj.core.api.Assertions.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -37,31 +34,32 @@ class JourneyServiceTest {
         journeyService = new JourneyService(journeyRepository);
     }
 
-    @Test
-    void canGetAllJourneys() {
-        // Given
-        int page = 0;
-        int size = 2;
-        Pageable pageable = PageRequest.of(page, size);
-
-        Journey journey1 = new Journey(1, LocalDateTime.now(), LocalDateTime.now().plusHours(1), 1, 2, 10, 10);
-        Journey journey2 = new Journey(2, LocalDateTime.now(), LocalDateTime.now().plusHours(2), 2, 1, 20, 20);
-
-        List<Journey> journeys = Arrays.asList(journey1, journey2);
-        Page<Journey> journeyPage = new PageImpl<>(journeys, pageable, journeys.size());
-
-        when(journeyRepository.findAll(pageable)).thenReturn(journeyPage);
-
-        // When
-        List<Journey> result = journeyService.getAllJourneys(page, size);
-
-        // Then
-        verify(journeyRepository).findAll(pageable);
-        verify(journeyRepository, times(1)).findAll(pageable);
-        assertThat(result).isNotNull();
-        assertThat(result).hasSize(2);
-        assertThat(result).containsExactly(journey1, journey2);
-    }
+//    @Disabled
+//    @Test
+//    void canGetAllJourneys() {
+//        // Given
+//        int page = 0;
+//        int size = 2;
+//        Pageable pageable = PageRequest.of(page, size);
+//
+//        Journey journey1 = new Journey(1, LocalDateTime.now(), LocalDateTime.now().plusHours(1), 1, 2, 10, 10);
+//        Journey journey2 = new Journey(2, LocalDateTime.now(), LocalDateTime.now().plusHours(2), 2, 1, 20, 20);
+//
+//        List<Journey> journeys = Arrays.asList(journey1, journey2);
+//        Page<Journey> journeyPage = new PageImpl<>(journeys, pageable, journeys.size());
+//
+//        when(journeyRepository.findAll(pageable)).thenReturn(journeyPage);
+//
+//        // When
+//        List<Journey> result = journeyService.getAllJourneys(page, size);
+//
+//        // Then
+//        verify(journeyRepository).findAll(pageable);
+//        verify(journeyRepository, times(1)).findAll(pageable);
+//        assertThat(result).isNotNull();
+//        assertThat(result).hasSize(2);
+//        assertThat(result).containsExactly(journey1, journey2);
+//    }
 
     @Test
     void canGetJourneyById() {

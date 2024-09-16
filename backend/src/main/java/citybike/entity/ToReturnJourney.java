@@ -1,6 +1,5 @@
 package citybike.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,8 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class Journey {
-
+public class ToReturnJourney {
     private int id;
     private LocalDateTime departureTime;
     private LocalDateTime returnTime;
@@ -17,6 +15,4 @@ public class Journey {
     private String returnStation;
     private Integer distance;
     private Integer duration;
-
-    private Journey() {}
 }

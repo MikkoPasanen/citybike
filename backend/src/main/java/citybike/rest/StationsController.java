@@ -25,7 +25,7 @@ public class StationsController {
     @GetMapping("/all")
     public ResponseEntity<List<Station>> getAllStations(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "100") int size
+            @RequestParam(defaultValue = "5") int size
     ) {
         return new ResponseEntity<>(stationService.getAllStations(page, size), HttpStatus.OK);
     }

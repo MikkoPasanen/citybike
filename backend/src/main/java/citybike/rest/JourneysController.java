@@ -1,16 +1,13 @@
 package citybike.rest;
 
 import citybike.entity.Journey;
-import citybike.services.JourneyRepository;
+import citybike.entity.ToReturnJourney;
 import citybike.services.JourneyService;
-import citybike.services.StationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 
 @RestController
@@ -25,9 +22,9 @@ public class JourneysController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Journey>> getAllStations(
+    public ResponseEntity<List<ToReturnJourney>> getAllStations(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "100") int size) {
+            @RequestParam(defaultValue = "5") int size) {
         return new ResponseEntity<>(journeyService.getAllJourneys(page, size), HttpStatus.OK);
     }
 

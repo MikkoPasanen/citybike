@@ -47,7 +47,7 @@ class StationsControllerTest {
         // Then & When
         mockMvc.perform(get("/stations/all")
                         .param("page", "1")
-                        .param("size", "100")
+                        .param("size", "5")
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))

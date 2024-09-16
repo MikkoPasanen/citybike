@@ -1,6 +1,5 @@
 package citybike.services;
 
-import citybike.entity.Journey;
 import citybike.entity.Station;
 import lombok.NonNull;
 import org.springframework.data.domain.Page;

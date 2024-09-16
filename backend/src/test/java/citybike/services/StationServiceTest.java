@@ -1,8 +1,6 @@
 package citybike.services;
 
-import citybike.entity.Journey;
 import citybike.entity.Station;
-import citybike.exceptions.JourneyNotFoundException;
 import citybike.exceptions.StationNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +12,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
