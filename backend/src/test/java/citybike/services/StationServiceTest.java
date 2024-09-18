@@ -1,7 +1,9 @@
 package citybike.services;
 
+import citybike.entity.Journey;
 import citybike.entity.Station;
-import citybike.exceptions.StationNotFoundException;
+import citybike.exceptions.JourneysNotFoundException;
+import citybike.exceptions.StationsNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,11 +15,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 
@@ -59,31 +61,50 @@ class StationServiceTest {
     }
 
     @Test
-    void canGetStationById() {
+    void shouldThrowErrorIfNoStations() {
+
         // Given
-        int id = 1;
-        Station station = new Station(1, "Name1", "Address1", "1.111", "2.222");
-        when(stationRepository.findById(id)).thenReturn(Optional.of(station));
+        int page = 0;
+        int size = 2;
+        Pageable pageable = PageRequest.of(page, size);
 
-        // When
-        Station result = stationService.getStationById(id);
-
-        // Then
-        verify(stationRepository).findById(id);
-        verify(stationRepository, times(1)).findById(id);
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(station);
-    }
-
-    @Test
-    void canNotGetStationById() {
-        // Given
-        int id = 1;
-        when(stationRepository.findById(id)).thenReturn(Optional.empty());
+        List<Station> stations = Collections.emptyList();
+        Page<Station> stationsPage = new PageImpl<>(stations, pageable, 0);
+        when(stationRepository.findAll(pageable)).thenReturn(stationsPage);
 
         // When & Then
-        assertThrows(StationNotFoundException.class, () -> {
-            stationService.getStationById(id);
+        assertThrows(StationsNotFoundException.class, () -> {
+            stationService.getAllStations(page, size);
         });
+
     }
+
+//    @Test
+//    void canGetStationById() {
+//        // Given
+//        int id = 1;
+//        Station station = new Station(1, "Name1", "Address1", "1.111", "2.222");
+//        when(stationRepository.findById(id)).thenReturn(Optional.of(station));
+//
+//        // When
+//        Station result = stationService.getStationById(id);
+//
+//        // Then
+//        verify(stationRepository).findById(id);
+//        verify(stationRepository, times(1)).findById(id);
+//        assertThat(result).isNotNull();
+//        assertThat(result).isEqualTo(station);
+//    }
+//
+//    @Test
+//    void canNotGetStationById() {
+//        // Given
+//        int id = 1;
+//        when(stationRepository.findById(id)).thenReturn(Optional.empty());
+//
+//        // When & Then
+//        assertThrows(StationNotFoundException.class, () -> {
+//            stationService.getStationById(id);
+//        });
+//    }
 }
