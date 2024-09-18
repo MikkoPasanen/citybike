@@ -30,9 +30,9 @@ public class StationsController {
         return new ResponseEntity<>(stationService.getAllStations(page, size), HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "http://localhost:5173")
-    @GetMapping("/singular/{id}")
-    public ResponseEntity<Station> getStationById(@PathVariable int id) {
-        return new ResponseEntity<>(stationService.getStationById(id), HttpStatus.OK);
-    }
+//    @CrossOrigin(origins = "http://localhost:5173")
+//    @GetMapping("/singular/{id}")
+//    public ResponseEntity<Station> getStationById(@PathVariable int id) {
+//        return new ResponseEntity<>(stationService.getStationById(id), HttpStatus.OK);
+//    }
 }

@@ -1,6 +1,6 @@
 package citybike.exceptions;
-public class StationNotFoundException extends RuntimeException {
-    public StationNotFoundException(String msg) {
+public class StationsNotFoundException extends RuntimeException {
+    public StationsNotFoundException(String msg) {
         super(msg);
     }
 }

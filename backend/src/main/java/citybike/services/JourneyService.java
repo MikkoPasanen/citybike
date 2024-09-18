@@ -3,7 +3,7 @@ package citybike.services;
 import citybike.entity.Journey;
 import citybike.entity.Station;
 import citybike.entity.ToReturnJourney;
-import citybike.exceptions.JourneyNotFoundException;
+import citybike.exceptions.JourneysNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +28,9 @@ public class JourneyService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Journey> journeyPage = journeyRepository.findAll(pageable);
 
+        // If no content, throw an error
+        if (journeyPage.getContent().isEmpty()) throw new JourneysNotFoundException("Couldn't find any Journeys!");
+
         // For each journey, find the names of the departure and return station
         List<ToReturnJourney> journeys = journeyPage.getContent().stream().map(journey -> {
             Station departureStation = stationRepository.findById(journey.getDepartureStation()).orElse(null);
@@ -39,6 +42,10 @@ public class JourneyService {
                     journey.getReturnTime(),
                     departureStation != null ? departureStation.getStationName() : "Unknown Station",
                     returnStation != null ? returnStation.getStationName() : "Unknown Station",
+                    departureStation != null ? departureStation.getCoordinateX() : "0,0",
+                    departureStation != null ? departureStation.getCoordinateY() : "0,0",
+                    returnStation != null ? returnStation.getCoordinateX() : "0,0",
+                    returnStation != null ? returnStation.getCoordinateY() : "0,0",
                     journey.getDistance(),
                     journey.getDuration() / 60
             );
@@ -47,8 +54,8 @@ public class JourneyService {
         return journeys;
     }
 
-    public Journey getJourneyById(int id) {
-        return journeyRepository.findById(id)
-                .orElseThrow(() -> new JourneyNotFoundException("Couldn't find journey with that id"));
-    }
+//    public Journey getJourneyById(int id) {
+//        return journeyRepository.findById(id)
+//                .orElseThrow(() -> new JourneyNotFoundException("Couldn't find journey with that id"));
+//    }
 }

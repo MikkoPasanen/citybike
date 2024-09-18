@@ -28,8 +28,8 @@ public class JourneysController {
         return new ResponseEntity<>(journeyService.getAllJourneys(page, size), HttpStatus.OK);
     }
 
-    @GetMapping("/singular/{id}")
-    public ResponseEntity<Journey> getStationById(@PathVariable int id) {
-        return new ResponseEntity<>(journeyService.getJourneyById(id), HttpStatus.OK);
-    }
+//    @GetMapping("/singular/{id}")
+//    public ResponseEntity<Journey> getStationById(@PathVariable int id) {
+//        return new ResponseEntity<>(journeyService.getJourneyById(id), HttpStatus.OK);
+//    }
 }

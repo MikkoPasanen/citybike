@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(StationNotFoundException.class)
-    public ResponseEntity<ErrorResponse> stationNotFoundException(StationNotFoundException ex) {
+    @ExceptionHandler(StationsNotFoundException.class)
+    public ResponseEntity<ErrorResponse> stationsNotFoundException(StationsNotFoundException ex) {
         ErrorResponse error = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND.value(),
@@ -21,8 +21,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(JourneyNotFoundException.class)
-    public ResponseEntity<ErrorResponse> journeyNotFoundException(JourneyNotFoundException ex) {
+    @ExceptionHandler(JourneysNotFoundException.class)
+    public ResponseEntity<ErrorResponse> journeysNotFoundException(JourneysNotFoundException ex) {
         ErrorResponse error = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND.value(),

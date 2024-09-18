@@ -13,6 +13,10 @@ public class ToReturnJourney {
     private LocalDateTime returnTime;
     private String departureStation;
     private String returnStation;
+    private String departureStationCoordX;
+    private String departureStationCoordY;
+    private String returnStationCoordX;
+    private String returnStationCoordY;
     private Integer distance;
     private Integer duration;
 }
