@@ -12,6 +12,10 @@ export type Journey = {
     returnTime: string;
     departureStation: string;
     returnStation: string;
+    departureStationCoordX: string;
+    departureStationCoordY: string;
+    returnStationCoordX: string;
+    returnStationCoordY: string;
     distance: number;
     duration: number;
 };

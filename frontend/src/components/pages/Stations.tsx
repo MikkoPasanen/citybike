@@ -11,21 +11,12 @@ import { ColumnDef } from "@tanstack/react-table";
 
 // Shadcn
 import { Button } from "../ui/button";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination";
 
 const Stations = () => {
     const [data, setData] = useState<Station[]>([]);
     const [openedStation, setOpenedStation] = useState<Station | null>(null);
     const [openDialog, setOpenDialog] = useState(false);
-    const [activeStep, setActiveStep] = useState<string>("first");
+    const [page, setPage] = useState(1);
 
     const columns: ColumnDef<Station>[] = [
         {
@@ -42,7 +33,7 @@ const Stations = () => {
                 <div className="flex justify-center">
                     <Button
                         onClick={() => {
-                            setOpenedStation(row.original);
+                            setOpenedStation(row.original as Station);
                             setOpenDialog(true);
                         }}
                         className="bg-yellow-400 text-black font-semibold"
@@ -63,7 +54,7 @@ const Stations = () => {
         const response = await axios.get("http://localhost:8080/stations/all", {
             params: {
                 page: 1,
-                size: 5,
+                size: 50,
             },
         });
         if (response.status === 200) {
@@ -78,7 +69,7 @@ const Stations = () => {
         }
 
         fetchData();
-    }, []);
+    }, [page]);
 
     return (
         <div className="flex overflow-hidden">
@@ -93,61 +84,6 @@ const Stations = () => {
                 <div className="container mx-auto py-10">
                     <DataTable columns={columns} data={data} />
                 </div>
-                <Pagination>
-                    <PaginationContent>
-                        <PaginationItem>
-                            <PaginationPrevious to="#" />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink
-                                to="#"
-                                isActive={activeStep === "first"}
-                                onClick={() => setActiveStep("first")}
-                                className={
-                                    activeStep === "first"
-                                        ? "bg-yellow-400 text-black hover:bg-yellow-600 hover:text-black"
-                                        : ""
-                                }
-                            >
-                                1
-                            </PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink
-                                to="#"
-                                isActive={activeStep === "second"}
-                                onClick={() => setActiveStep("second")}
-                                className={
-                                    activeStep === "second"
-                                        ? "bg-yellow-400 text-black hover:bg-yellow-600 hover:text-black"
-                                        : ""
-                                }
-                            >
-                                2
-                            </PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink
-                                to="#"
-                                isActive={activeStep === "third"}
-                                onClick={() => setActiveStep("third")}
-                                className={
-                                    activeStep === "third"
-                                        ? "bg-yellow-400 text-black hover:bg-yellow-600 hover:text-black"
-                                        : ""
-                                }
-                            >
-                                3
-                            </PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationNext to="#" />
-                        </PaginationItem>
-                    </PaginationContent>
-                </Pagination>
             </div>
             <SingleStation
                 isOpen={openDialog}

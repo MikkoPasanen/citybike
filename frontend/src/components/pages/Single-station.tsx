@@ -44,7 +44,7 @@ const SingleStation = ({
                         {station?.stationAddress}
                     </DialogTitle>
                     <DialogDescription className="text-center">
-                        Kartasta näet aseman sijainnin.
+                        You can see the location of the station on the map below
                         <br />
                     </DialogDescription>
                 </DialogHeader>

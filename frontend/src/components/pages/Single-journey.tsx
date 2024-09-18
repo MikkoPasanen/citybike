@@ -44,7 +44,7 @@ const SingleJourney = ({
                             journey?.returnStation}
                     </DialogTitle>
                     <DialogDescription className="text-center">
-                        You can see the departure and return stations on the map
+                        You can see the departure and return stations on the map below
                         <br />
                         <br />
                         <div className="flex justify-center">
@@ -58,7 +58,14 @@ const SingleJourney = ({
                     </DialogDescription>
                 </DialogHeader>
                 <MapContainer
-                    center={journey ? [Number(0), Number(0)] : [0, 0]}
+                    center={
+                        journey
+                            ? [
+                                  Number(journey.departureStationCoordY),
+                                  Number(journey.departureStationCoordX),
+                              ]
+                            : [0, 0]
+                    }
                     zoom={15}
                     scrollWheelZoom={true}
                     className="h-72 rounded"
@@ -69,21 +76,36 @@ const SingleJourney = ({
                         maxZoom={20}
                         minZoom={6}
                     />
-                    {/* <Marker
+                    <Marker
                         position={
-                            station
+                            journey
                                 ? [
-                                      Number(station.coordinateY),
-                                      Number(station.coordinateX),
+                                      Number(journey.departureStationCoordY),
+                                      Number(journey.departureStationCoordX),
                                   ]
                                 : [0, 0]
                         }
                     >
                         <Popup>
-                            {station?.stationName} <br />{" "}
-                            {station?.stationAddress}
+                            <b>Departure station</b> <br />
+                            {journey?.departureStation}
                         </Popup>
-                    </Marker> */}
+                    </Marker>
+                    <Marker
+                        position={
+                            journey
+                                ? [
+                                      Number(journey.returnStationCoordY),
+                                      Number(journey.returnStationCoordX),
+                                  ]
+                                : [0, 0]
+                        }
+                    >
+                        <Popup>
+                            <b>Return station</b> <br />
+                            {journey?.returnStation}
+                        </Popup>
+                    </Marker>
                 </MapContainer>
             </DialogContent>
         </Dialog>
