@@ -39,6 +39,7 @@ class StationsControllerTest {
         Station station1 = new Station(1, "Name1", "Address1", "1.111", "2.222");
         Station station2 = new Station(2, "Name2", "Address2", "2.222", "1.111");
         when(stationService.getAllStations(1, 5)).thenReturn(Arrays.asList(station1, station2));
+        when(stationService.getStationCount()).thenReturn(2L);
 
         // Then & When
         mockMvc.perform(get("/stations/all")
@@ -47,17 +48,22 @@ class StationsControllerTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].stationName").value("Name1"))
-                .andExpect(jsonPath("$[0].stationAddress").value("Address1"))
-                .andExpect(jsonPath("$[0].coordinateX").value("1.111"))
-                .andExpect(jsonPath("$[0].coordinateY").value("2.222"))
-                .andExpect(jsonPath("$[1].id").value(2))
-                .andExpect(jsonPath("$[1].stationName").value("Name2"))
-                .andExpect(jsonPath("$[1].stationAddress").value("Address2"))
-                .andExpect(jsonPath("$[1].coordinateX").value("2.222"))
-                .andExpect(jsonPath("$[1].coordinateY").value("1.111"));
+
+                // Check amount of stations
+                .andExpect(jsonPath("$.amountOfStations").value(2L))
+
+                // Check stations itself
+                .andExpect(jsonPath("$.stations", hasSize(2)))
+                .andExpect(jsonPath("$.stations[0].id").value(1))
+                .andExpect(jsonPath("$.stations[0].stationName").value("Name1"))
+                .andExpect(jsonPath("$.stations[0].stationAddress").value("Address1"))
+                .andExpect(jsonPath("$.stations[0].coordinateX").value("1.111"))
+                .andExpect(jsonPath("$.stations[0].coordinateY").value("2.222"))
+                .andExpect(jsonPath("$.stations[1].id").value(2))
+                .andExpect(jsonPath("$.stations[1].stationName").value("Name2"))
+                .andExpect(jsonPath("$.stations[1].stationAddress").value("Address2"))
+                .andExpect(jsonPath("$.stations[1].coordinateX").value("2.222"))
+                .andExpect(jsonPath("$.stations[1].coordinateY").value("1.111"));
     }
 
     @Test

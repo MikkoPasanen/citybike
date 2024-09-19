@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -77,6 +78,21 @@ class StationServiceTest {
             stationService.getAllStations(page, size);
         });
 
+    }
+
+    @Test
+    void shouldReturnTheAmountOfStations() {
+
+        // Given
+        Long expected = 10L;
+        when(stationRepository.count()).thenReturn(expected);
+
+        // When
+        Long actual = stationService.getStationCount();
+
+        // Then
+        assertEquals(expected, actual);
+        verify(stationRepository).count();
     }
 
 //    @Test

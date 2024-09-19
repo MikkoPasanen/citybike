@@ -65,6 +65,7 @@
                  20 // duration in minutes
          );
          when(journeyService.getAllJourneys(1, 5)).thenReturn(Arrays.asList(toReturn1, toReturn2));
+         when(journeyService.getJourneyCount()).thenReturn(2L);
 
          // Then & When
          mockMvc.perform(get("/journeys/all")
@@ -73,29 +74,34 @@
                  )
                  .andExpect(status().isOk())
                  .andExpect(content().contentType("application/json"))
-                 .andExpect(jsonPath("$", hasSize(2)))
-                 .andExpect(jsonPath("$[0].id").value(1))
-                 .andExpect(jsonPath("$[0].departureTime").value(fixedStartTime.toString()))
-                 .andExpect(jsonPath("$[0].returnTime").value(fixedEndTime.toString()))
-                 .andExpect(jsonPath("$[0].departureStation").value("Name1"))
-                 .andExpect(jsonPath("$[0].returnStation").value("Name2"))
-                 .andExpect(jsonPath("$[0].departureStationCoordX").value("1.111"))
-                 .andExpect(jsonPath("$[0].departureStationCoordY").value("2.222"))
-                 .andExpect(jsonPath("$[0].returnStationCoordX").value("2.222"))
-                 .andExpect(jsonPath("$[0].returnStationCoordY").value("1.111"))
-                 .andExpect(jsonPath("$[0].distance").value(10))
-                 .andExpect(jsonPath("$[0].duration").value(10))
-                 .andExpect(jsonPath("$[1].id").value(2))
-                 .andExpect(jsonPath("$[1].departureTime").value(fixedStartTime.toString()))
-                 .andExpect(jsonPath("$[1].returnTime").value(fixedEndTime.toString()))
-                 .andExpect(jsonPath("$[1].departureStation").value("Name2"))
-                 .andExpect(jsonPath("$[1].returnStation").value("Name1"))
-                 .andExpect(jsonPath("$[1].departureStationCoordX").value("2.222"))
-                 .andExpect(jsonPath("$[1].departureStationCoordY").value("1.111"))
-                 .andExpect(jsonPath("$[1].returnStationCoordX").value("1.111"))
-                 .andExpect(jsonPath("$[1].returnStationCoordY").value("2.222"))
-                 .andExpect(jsonPath("$[1].distance").value(20))
-                 .andExpect(jsonPath("$[1].duration").value(20));
+
+                 // Check amount of journeys
+                 .andExpect(jsonPath("$.amountOfJourneys").value(2L))
+
+                 // Check journeys itself
+                 .andExpect(jsonPath("$.journeys", hasSize(2)))
+                 .andExpect(jsonPath("$.journeys[0].id").value(1))
+                 .andExpect(jsonPath("$.journeys[0].departureTime").value(fixedStartTime.toString()))
+                 .andExpect(jsonPath("$.journeys[0].returnTime").value(fixedEndTime.toString()))
+                 .andExpect(jsonPath("$.journeys[0].departureStation").value("Name1"))
+                 .andExpect(jsonPath("$.journeys[0].returnStation").value("Name2"))
+                 .andExpect(jsonPath("$.journeys[0].departureStationCoordX").value("1.111"))
+                 .andExpect(jsonPath("$.journeys[0].departureStationCoordY").value("2.222"))
+                 .andExpect(jsonPath("$.journeys[0].returnStationCoordX").value("2.222"))
+                 .andExpect(jsonPath("$.journeys[0].returnStationCoordY").value("1.111"))
+                 .andExpect(jsonPath("$.journeys[0].distance").value(10))
+                 .andExpect(jsonPath("$.journeys[0].duration").value(10))
+                 .andExpect(jsonPath("$.journeys[1].id").value(2))
+                 .andExpect(jsonPath("$.journeys[1].departureTime").value(fixedStartTime.toString()))
+                 .andExpect(jsonPath("$.journeys[1].returnTime").value(fixedEndTime.toString()))
+                 .andExpect(jsonPath("$.journeys[1].departureStation").value("Name2"))
+                 .andExpect(jsonPath("$.journeys[1].returnStation").value("Name1"))
+                 .andExpect(jsonPath("$.journeys[1].departureStationCoordX").value("2.222"))
+                 .andExpect(jsonPath("$.journeys[1].departureStationCoordY").value("1.111"))
+                 .andExpect(jsonPath("$.journeys[1].returnStationCoordX").value("1.111"))
+                 .andExpect(jsonPath("$.journeys[1].returnStationCoordY").value("2.222"))
+                 .andExpect(jsonPath("$.journeys[1].distance").value(20))
+                 .andExpect(jsonPath("$.journeys[1].duration").value(20));
      }
 
      @Test

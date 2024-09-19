@@ -118,6 +118,21 @@
 
      }
 
+     @Test
+     void shouldReturnTheAmountOfJourneys() {
+
+         // Given
+         Long expected = 10L;
+         when(journeyRepository.count()).thenReturn(expected);
+
+         // When
+         Long actual = journeyService.getJourneyCount();
+
+         // Then
+         assertEquals(expected, actual);
+         verify(journeyRepository).count();
+     }
+
 //     @Test
 //     void canGetJourneyById() {
 //         // Given
