@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class JourneyService {
@@ -52,6 +51,10 @@ public class JourneyService {
         }).toList();
 
         return journeys;
+    }
+
+    public Long getJourneyCount() {
+        return journeyRepository.count();
     }
 
 //    public Journey getJourneyById(int id) {

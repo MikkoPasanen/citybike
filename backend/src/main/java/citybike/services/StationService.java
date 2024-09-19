@@ -26,6 +26,10 @@ public class StationService {
         return stationPage.getContent();
     }
 
+    public Long getStationCount() {
+        return stationRepository.count();
+    }
+
 //    public Station getStationById(int id) {
 //        return stationRepository.findById(id)
 //                .orElseThrow(() -> new StationNotFoundException("Couldn't find station with that id"));

@@ -1,10 +1,8 @@
  package citybike.rest;
 
- import citybike.entity.Journey;
  import citybike.entity.ToReturnJourney;
  import citybike.exceptions.JourneysNotFoundException;
  import citybike.services.JourneyService;
- import org.junit.jupiter.api.Disabled;
  import org.junit.jupiter.api.Test;
  import org.junit.jupiter.api.extension.ExtendWith;
  import org.mockito.junit.jupiter.MockitoExtension;
@@ -16,7 +14,6 @@
 
  import java.time.LocalDateTime;
  import java.util.Arrays;
- import java.util.Collections;
 
  import static org.hamcrest.Matchers.hasSize;
  import static org.mockito.Mockito.when;

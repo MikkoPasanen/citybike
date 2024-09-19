@@ -1,6 +1,7 @@
 package citybike.rest;
 
 import citybike.entity.Station;
+import citybike.entity.StationResponse;
 import citybike.services.StationRepository;
 import citybike.services.StationService;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,14 @@ public class StationsController {
 
     @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/all")
-    public ResponseEntity<List<Station>> getAllStations(
+    public ResponseEntity<StationResponse> getAllStations(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        return new ResponseEntity<>(stationService.getAllStations(page, size), HttpStatus.OK);
+        List<Station> stations = stationService.getAllStations(page, size);
+        Long amountOfStations = stationService.getStationCount();
+
+        return new ResponseEntity<>(new StationResponse(amountOfStations, stations), HttpStatus.OK);
     }
 
 //    @CrossOrigin(origins = "http://localhost:5173")
