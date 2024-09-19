@@ -66,7 +66,7 @@ const SingleJourney = ({
                               ]
                             : [0, 0]
                     }
-                    zoom={15}
+                    zoom={14}
                     scrollWheelZoom={true}
                     className="h-72 rounded"
                 >

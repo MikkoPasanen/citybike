@@ -1,75 +1,20 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 // Components
 import SingleStation from "./Single-station";
 
 // Types & data
 import { Station } from "../data/types";
-import { DataTable } from "@/components/data/data-table";
-import { ColumnDef } from "@tanstack/react-table";
-
-// Shadcn
-import { Button } from "../ui/button";
+import { StationsTable } from "../data/Stations-table";
 
 const Stations = () => {
-    const [data, setData] = useState<Station[]>([]);
     const [openedStation, setOpenedStation] = useState<Station | null>(null);
     const [openDialog, setOpenDialog] = useState(false);
-    const [page, setPage] = useState(1);
-
-    const columns: ColumnDef<Station>[] = [
-        {
-            accessorKey: "stationName",
-            header: () => <div className="text-center">Station Name</div>,
-        },
-        {
-            accessorKey: "stationAddress",
-            header: () => <div className="text-center">Station Address</div>,
-        },
-        {
-            id: "actions",
-            cell: ({ row }) => (
-                <div className="flex justify-center">
-                    <Button
-                        onClick={() => {
-                            setOpenedStation(row.original as Station);
-                            setOpenDialog(true);
-                        }}
-                        className="bg-yellow-400 text-black font-semibold"
-                    >
-                        More info
-                    </Button>
-                </div>
-            ),
-        },
-    ];
 
     const closeDialog = () => {
         setOpenDialog(false);
         setOpenedStation(null);
     };
-
-    async function fetchStations() {
-        const response = await axios.get("http://localhost:8080/stations/all", {
-            params: {
-                page: 1,
-                size: 50,
-            },
-        });
-        if (response.status === 200) {
-            return response.data;
-        }
-    }
-
-    useEffect(() => {
-        async function fetchData() {
-            const data = await fetchStations();
-            setData(data);
-        }
-
-        fetchData();
-    }, [page]);
 
     return (
         <div className="flex overflow-hidden">
@@ -82,7 +27,10 @@ const Stations = () => {
             <div className="text-center flex-grow">
                 <h1 className="text-2xl pt-2 font-semibold">Stations</h1>
                 <div className="container mx-auto py-10">
-                    <DataTable columns={columns} data={data} />
+                    <StationsTable
+                        setOpenedStation={setOpenedStation}
+                        setOpenDialog={setOpenDialog}
+                    />
                 </div>
             </div>
             <SingleStation
