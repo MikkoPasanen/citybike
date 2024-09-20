@@ -26,11 +26,11 @@ const Journeys = () => {
             </div>
             <div className="text-center flex-grow">
                 <h1 className="text-2xl pt-2 font-semibold">Journeys</h1>
-                <div className="container mx-auto py-10">
-                <JourneysTable
-                    setOpenedJourney={setOpenedJourney}
-                    setOpenDialog={setOpenDialog}
-                />
+                <div className="container mx-auto py-5">
+                    <JourneysTable
+                        setOpenedJourney={setOpenedJourney}
+                        setOpenDialog={setOpenDialog}
+                    />
                 </div>
             </div>
             <SingleJourney

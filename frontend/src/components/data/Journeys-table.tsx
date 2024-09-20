@@ -30,7 +30,7 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { Journey } from "./types"
+import { Journey } from "./types";
 
 export const JourneysTable = ({
     setOpenDialog,
@@ -41,9 +41,9 @@ export const JourneysTable = ({
 }) => {
     // States & variables
     const [data, setData] = useState<Journey[]>([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [amountOfPages, setAmountOfPages] = useState(0);
-    const DATA_SIZE = 7;
+    const DATA_SIZE = 5;
 
     // Columns
     const columns: ColumnDef<Journey>[] = [
@@ -87,7 +87,7 @@ export const JourneysTable = ({
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        initialState: { pagination: { pageSize: 7 } },
+        initialState: { pagination: { pageSize: 5 } },
     });
 
     // Fetch data on mount
@@ -110,11 +110,15 @@ export const JourneysTable = ({
 
         async function fetchData() {
             const data = await fetchJourneys();
-            setData(data.journeys.map((journey: Journey) => {
-                journey.departureTime = formatTimestamp(journey.departureTime);
-                journey.returnTime = formatTimestamp(journey.returnTime);
-                return journey;
-            }));
+            setData(
+                data.journeys.map((journey: Journey) => {
+                    journey.departureTime = formatTimestamp(
+                        journey.departureTime
+                    );
+                    journey.returnTime = formatTimestamp(journey.returnTime);
+                    return journey;
+                })
+            );
             setAmountOfPages(Math.ceil(data.amountOfJourneys / DATA_SIZE));
         }
 

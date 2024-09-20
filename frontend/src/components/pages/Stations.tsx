@@ -26,7 +26,7 @@ const Stations = () => {
             </div>
             <div className="text-center flex-grow">
                 <h1 className="text-2xl pt-2 font-semibold">Stations</h1>
-                <div className="container mx-auto py-10">
+                <div className="container mx-auto py-5">
                     <StationsTable
                         setOpenedStation={setOpenedStation}
                         setOpenDialog={setOpenDialog}

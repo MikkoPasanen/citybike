@@ -41,7 +41,7 @@ export const StationsTable = ({
     const [data, setData] = useState<Station[]>([]);
     const [amountOfPages, setAmountOfPages] = useState(0);
     const [page, setPage] = useState(0);
-    const DATA_SIZE = 7;
+    const DATA_SIZE = 5;
 
     // Columns
     const columns: ColumnDef<Station>[] = [
@@ -76,7 +76,7 @@ export const StationsTable = ({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-        initialState: { pagination: { pageSize: 7 } },
+        initialState: { pagination: { pageSize: 5 } },
     });
 
     // Fetch data on mount
@@ -109,7 +109,9 @@ export const StationsTable = ({
     return (
         <>
             <div className="flex justify-between items-center w-3/4 mx-auto mb-2">
-                <h1 className="text-md pt-2 font-semibold">Helsinki citybike stations</h1>
+                <h1 className="text-md pt-2 font-semibold">
+                    Helsinki citybike stations
+                </h1>
                 <h1 className="text-md pt-2 font-semibold">
                     Page {page + 1} / {amountOfPages}
                 </h1>
